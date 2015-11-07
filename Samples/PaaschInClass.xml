@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../Schemas/TBXinTEI.rnc" type="application/relax-ng-compact-syntax"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title/>
+            </titleStmt>
+            <publicationStmt>
+                <p>...</p>
+            </publicationStmt>
+            <sourceDesc>
+                <bibl>Paasch, Heinrich. 2010. de La Quille a la Pomme de Mat: Dictionnaire de Marine En Anglais, Francais Et Allemand. Kessinger Publishing.</bibl>
+            </sourceDesc>
+        </fileDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <div>
+                <head>Anchors</head>
+                <p>For a <term target="ccc">Sailing-Vessel</term> of <measure type="weight">100 tons</measure>...</p>
+
+                <termEntry xmlns="http://www.tbx.org" xml:id="entry234">
+                    <langSet>
+                        <tig>
+                            <tei:term>anchor</tei:term>
+                        </tig>
+                    </langSet>
+                </termEntry>
+
+                <termEntry xmlns="http://www.tbx.org" xml:id="entry235">
+                    <ref xmlns="http://www.tei-c.org/ns/1.0" target="#entry236"> 3 Bowers, from 30 to 36 Cwt. each </ref>
+                    <langSet>
+                        <tig>
+                            <tei:term>SV 1000</tei:term>
+                        </tig>
+                    </langSet>
+                </termEntry>
+
+                <termEntry xmlns="http://www.tbx.org" xml:id="entry236">
+                    <langSet>
+                        <tig>
+                            <tei:term>Bower</tei:term>
+                        </tig>
+                    </langSet>
+                </termEntry>
+
+                <termEntry xmlns="http://www.tbx.org">
+                    <descrip type="superordinateConceptPartitive" target="#entry234"/>
+                    <langSet xml:lang="en">
+                        <tig>
+                            <tei:term>anchordavit</tei:term>
+                        </tig>
+                    </langSet>
+                    <langSet xml:lang="fr">
+                        <tig>
+                            <tei:term>Davier d'ancre</tei:term>
+                        </tig>
+                    </langSet>
+                    <langSet xml:lang="de">
+                        <tig>
+                            <tei:term>Ankerdavid</tei:term>
+                        </tig>
+                    </langSet>
+                </termEntry>
+
+                <termEntry xmlns="http://www.tbx.org" xml:id="x746">
+                    <langSet xml:lang="en">
+                        <tig>
+                            <tei:term>anchorchock</tei:term>
+                        </tig>
+                    </langSet>
+                    <langSet xml:lang="fr">
+                        <note place="bottom" xmlns="http://www.tei-c.org/ns/1.0"/>
+                        <tig>
+                            <tei:term>Poste d'ancre</tei:term>
+                        </tig>
+                        <tig>
+                            <tei:term>Flesque d'ancre</tei:term>
+                        </tig>
+                    </langSet>
+                    <langSet xml:lang="de">
+                        <tig>
+                            <tei:term>Schweinsrücken</tei:term>
+                        </tig>
+                    </langSet>
+                </termEntry>
+
+            </div>
+        </body>
+    </text>
+</TEI>
