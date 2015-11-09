@@ -319,7 +319,7 @@
       <div>
         <schemaSpec ident="TBXinTEI" start="TEI teiCorpus">
           <moduleRef key="tei"/>
-          <moduleRef key="header" except="biblFull"/>
+          <moduleRef key="header" except="biblFull xenoData"/>
           <moduleRef key="core"/>
           <moduleRef key="textstructure" include="TEI text div body"/>
           <moduleRef key="namesdates"/>

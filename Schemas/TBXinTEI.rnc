@@ -1,14 +1,13 @@
-default namespace = "http://www.tei-c.org/ns/Examples"
 namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace ns1 = "http://www.isocat.org/ns/dcr"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
 namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace tbx = "http://www.tbx.org"
-namespace tei = "http://www.tei-c.org/ns/1.0"
+default namespace tei = "http://www.tei-c.org/ns/1.0"
 namespace xi = "http://www.w3.org/2001/XInclude"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2015-11-04T14:41:00Z. .
+# Schema generated from ODD source 2015-11-09T22:20:58Z. .
 # TEI Edition: Version 2.9.1. Last updated on
 #	15th October 2015, revision 46ac023
 # TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.9.1/
@@ -34,11 +33,6 @@ macro.specialPara =
    | model.divPart
    | model.global)*
 macro.xtext = (text | model.gLike)*
-macro.anyXML =
-  element * - (tei:* | egXML) {
-    attribute * { text }*,
-    (text | macro.anyXML)*
-  }
 data.certainty = "high" | "medium" | "low" | "unknown"
 data.probability = xsd:double { minInclusive = "0" maxInclusive = "1" }
 data.numeric =
@@ -1335,7 +1329,7 @@ model.divLike = \div
 model.divGenLike = divGen
 model.div1Like = notAllowed
 model.applicationLike = application
-model.teiHeaderPart = encodingDesc | profileDesc | xenoData
+model.teiHeaderPart = encodingDesc | profileDesc
 model.sourceDescPart = notAllowed
 model.encodingDescPart =
   projectDesc
@@ -1453,7 +1447,7 @@ att.milestoneUnit.attribute.unit =
 p =
   
   ## (paragraph) marks paragraphs in prose. [3.1. Paragraphs 7.2.5. Speech Contents]
-  element tei:p {
+  element p {
     macro.paraContent
     >> sch:pattern [
          id = "TBXinTEI-p-abstractModel-p-constraint-1"
@@ -1504,19 +1498,19 @@ p =
 foreign =
   
   ## identifies a word or phrase as belonging to some language other than that of the surrounding text. [3.3.2.1. Foreign Words or Expressions]
-  element tei:foreign { macro.phraseSeq, att.global.attributes, empty }
+  element foreign { macro.phraseSeq, att.global.attributes, empty }
 emph =
   
   ## (emphasized) marks words or phrases which are stressed or emphasized for linguistic or rhetorical effect. [3.3.2.2. Emphatic Words and Phrases 3.3.2. Emphasis, Foreign Words, and Unusual Language]
-  element tei:emph { macro.paraContent, att.global.attributes, empty }
+  element emph { macro.paraContent, att.global.attributes, empty }
 hi =
   
   ## (highlighted) marks a word or phrase as graphically distinct from the surrounding text, for reasons concerning which no claim is made. [3.3.2.2. Emphatic Words and Phrases 3.3.2. Emphasis, Foreign Words, and Unusual Language]
-  element tei:hi { macro.paraContent, att.global.attributes, empty }
+  element hi { macro.paraContent, att.global.attributes, empty }
 distinct =
   
   ## identifies any word or phrase which is regarded as linguistically distinct, for example as archaic, technical, dialectal, non-preferred, etc., or as forming part of a sublanguage. [3.3.2.3. Other Linguistically Distinct Material]
-  element tei:distinct {
+  element distinct {
     macro.phraseSeq,
     att.global.attributes,
     
@@ -1536,7 +1530,7 @@ distinct =
 said =
   
   ## (speech or thought) indicates passages thought or spoken aloud, whether explicitly indicated in the source or not, whether directly or indirectly reported, whether by real people or fictional characters. [3.3.3. Quotation]
-  element tei:said {
+  element said {
     macro.specialPara,
     att.global.attributes,
     att.ascribed.attributes,
@@ -1552,7 +1546,7 @@ said =
 quote =
   
   ## (quotation) contains a phrase or passage attributed by the narrator or author to some agency external to the text. [3.3.3. Quotation 4.3.1. Grouped Texts]
-  element tei:quote {
+  element quote {
     macro.specialPara,
     att.global.attributes,
     att.typed.attributes,
@@ -1562,7 +1556,7 @@ quote =
 q =
   
   ## (quoted) contains material which is distinguished from the surrounding text using quotation marks or a similar method, for any one of a variety of reasons including, but not limited to: direct speech or thought, technical terms or jargon, authorial distance, quotations from elsewhere, and passages that are mentioned but not used. [3.3.3. Quotation]
-  element tei:q {
+  element q {
     macro.specialPara,
     att.global.attributes,
     att.ascribed.attributes,
@@ -1605,7 +1599,7 @@ q =
 cit =
   
   ## (cited quotation) contains a quotation from some other document, together with a bibliographic reference to its source. In a dictionary it may contain an example text with at least one occurrence of the word form, used in the sense being described, or a translation of the headword, or an example. [3.3.3. Quotation 4.3.1. Grouped Texts 9.3.5.1. Examples]
-  element tei:cit {
+  element cit {
     (model.qLike
      | model.egLike
      | model.biblLike
@@ -1619,17 +1613,15 @@ cit =
 mentioned =
   
   ## marks words or phrases mentioned, not used. [3.3.3. Quotation]
-  element tei:mentioned {
-    macro.phraseSeq, att.global.attributes, empty
-  }
+  element mentioned { macro.phraseSeq, att.global.attributes, empty }
 soCalled =
   
   ## contains a word or phrase for which the author or narrator indicates a disclaiming of responsibility, for example by the use of scare quotes or italics. [3.3.3. Quotation]
-  element tei:soCalled { macro.phraseSeq, att.global.attributes, empty }
+  element soCalled { macro.phraseSeq, att.global.attributes, empty }
 desc =
   
   ## (description) contains a brief description of the object documented by its parent element, including its intended usage, purpose, or application where this is appropriate. [22.4.1. Description of Components]
-  element tei:desc {
+  element desc {
     macro.limitedContent,
     att.global.attributes,
     att.translatable.attributes,
@@ -1639,7 +1631,7 @@ desc =
 gloss =
   
   ## identifies a phrase or word used to provide a gloss or definition for some other word or phrase. [3.3.4. Terms, Glosses, Equivalents, and Descriptions 22.4.1. Description of Components]
-  element tei:gloss {
+  element gloss {
     macro.phraseSeq,
     att.global.attributes,
     att.translatable.attributes,
@@ -1651,7 +1643,7 @@ gloss =
 term =
   
   ## contains a single-word, multi-word, or symbolic designation which is regarded as a technical term. [3.3.4. Terms, Glosses, Equivalents, and Descriptions]
-  element tei:term {
+  element term {
     macro.phraseSeq,
     att.global.attributes,
     att.pointing.attributes,
@@ -1665,7 +1657,7 @@ sic =
   
   ## (Latin for thus or so
   ##    ) contains text reproduced although apparently incorrect or inaccurate. [3.4.1. Apparent Errors]
-  element tei:sic {
+  element sic {
     macro.paraContent,
     att.global.attributes,
     att.source.attributes,
@@ -1674,7 +1666,7 @@ sic =
 corr =
   
   ## (correction) contains the correct form of a passage apparently erroneous in the copy text. [3.4.1. Apparent Errors]
-  element tei:corr {
+  element corr {
     macro.paraContent,
     att.global.attributes,
     att.editLike.attributes,
@@ -1684,14 +1676,14 @@ corr =
 choice =
   
   ## groups a number of alternative encodings for the same point in a text. [3.4. Simple Editorial Changes]
-  element tei:choice {
+  element choice {
     (model.choicePart | choice)*, att.global.attributes, empty
   }
 reg =
   
   ## (regularization) contains a reading which has been regularized or normalized in some sense. [3.4.2. Regularization and
   ## Normalization 12. Critical Apparatus]
-  element tei:reg {
+  element reg {
     macro.paraContent,
     att.global.attributes,
     att.editLike.attributes,
@@ -1702,7 +1694,7 @@ orig =
   
   ## (original form) contains a reading which is marked as following the original, rather than being normalized or corrected. [3.4.2. Regularization and
   ## Normalization 12. Critical Apparatus]
-  element tei:orig {
+  element orig {
     macro.paraContent,
     att.global.attributes,
     att.source.attributes,
@@ -1711,7 +1703,7 @@ orig =
 gap =
   
   ## indicates a point where material has been omitted in a transcription, whether for editorial reasons described in the TEI header, as part of sampling practice, or because the material is illegible, invisible, or inaudible. [3.4.3. Additions, Deletions, and Omissions]
-  element tei:gap {
+  element gap {
     (model.descLike | model.certLike)*,
     att.global.attributes,
     att.editLike.attributes,
@@ -1732,7 +1724,7 @@ gap =
 add =
   
   ## (addition) contains letters, words, or phrases inserted in the source text by an author, scribe, or a previous annotator or corrector. [3.4.3. Additions, Deletions, and Omissions]
-  element tei:add {
+  element add {
     macro.paraContent,
     att.global.attributes,
     att.transcriptional.attributes,
@@ -1743,7 +1735,7 @@ add =
 del =
   
   ## (deletion) contains a letter, word, or passage deleted, marked as deleted, or otherwise indicated as superfluous or spurious in the copy text by an author, scribe, or a previous annotator or corrector. [3.4.3. Additions, Deletions, and Omissions]
-  element tei:del {
+  element del {
     macro.paraContent,
     att.global.attributes,
     att.transcriptional.attributes,
@@ -1753,7 +1745,7 @@ del =
 unclear =
   
   ## contains a word, phrase, or passage which cannot be transcribed with certainty because it is illegible or inaudible in the source. [11.3.3.1. Damage, Illegibility, and Supplied Text 3.4.3. Additions, Deletions, and Omissions]
-  element tei:unclear {
+  element unclear {
     macro.paraContent,
     att.global.attributes,
     att.editLike.attributes,
@@ -1774,7 +1766,7 @@ unclear =
 name =
   
   ## (name, proper noun) contains a proper noun or noun phrase. [3.5.1. Referring Strings]
-  element tei:name {
+  element name {
     macro.phraseSeq,
     att.global.attributes,
     att.personal.attributes,
@@ -1785,7 +1777,7 @@ name =
 rs =
   
   ## (referencing string) contains a general purpose name or referring string. [13.2.1. Personal Names 3.5.1. Referring Strings]
-  element tei:rs {
+  element rs {
     macro.phraseSeq,
     att.global.attributes,
     att.naming.attributes,
@@ -1796,11 +1788,11 @@ rs =
 email =
   
   ## (electronic mail address) contains an email address identifying a location to which email messages can be delivered. [3.5.2. Addresses]
-  element tei:email { macro.phraseSeq, att.global.attributes, empty }
+  element email { macro.phraseSeq, att.global.attributes, empty }
 address =
   
   ## contains a postal address, for example of a publisher, an organization, or an individual. [3.5.2. Addresses 2.2.4. Publication, Distribution, Licensing, etc. 3.11.2.4. Imprint, Size of a Document, and Reprint Information]
-  element tei:address {
+  element address {
     (model.global*, (model.addrPart, model.global*)+),
     att.global.attributes,
     empty
@@ -1808,24 +1800,24 @@ address =
 addrLine =
   
   ## (address line) contains one line of a postal address. [3.5.2. Addresses 2.2.4. Publication, Distribution, Licensing, etc. 3.11.2.4. Imprint, Size of a Document, and Reprint Information]
-  element tei:addrLine { macro.phraseSeq, att.global.attributes, empty }
+  element addrLine { macro.phraseSeq, att.global.attributes, empty }
 street =
   
   ## contains a full street address including any name or number identifying a building as well as the name of the street or route on which it is located. [3.5.2. Addresses]
-  element tei:street { macro.phraseSeq, att.global.attributes, empty }
+  element street { macro.phraseSeq, att.global.attributes, empty }
 postCode =
   
   ## (postal code) contains a numerical or alphanumeric code used as part of a postal address to simplify sorting or delivery of mail. [3.5.2. Addresses]
-  element tei:postCode { text, att.global.attributes, empty }
+  element postCode { text, att.global.attributes, empty }
 postBox =
   
   ## (postal box or post office box) contains a number or other identifier for some postal delivery point other than a street address. [3.5.2. Addresses]
-  element tei:postBox { text, att.global.attributes, empty }
+  element postBox { text, att.global.attributes, empty }
 num =
   
   ## (number) contains a number, written in any form. [3.5.3. Numbers and
   ## Measures]
-  element tei:num {
+  element num {
     macro.phraseSeq,
     att.global.attributes,
     att.ranging.attributes,
@@ -1856,7 +1848,7 @@ measure =
   
   ## contains a word or phrase referring to some quantity of an object or commodity, usually comprising a number, a unit, and a commodity name. [3.5.3. Numbers and
   ## Measures]
-  element tei:measure {
+  element measure {
     macro.phraseSeq,
     att.global.attributes,
     att.measurement.attributes,
@@ -1868,7 +1860,7 @@ measure =
 measureGrp =
   
   ## (measure group) contains a group of dimensional specifications which relate to the same object, for example the height and width of a manuscript page. [10.3.4. Dimensions]
-  element tei:measureGrp {
+  element measureGrp {
     (text | model.gLike | model.measureLike)*,
     att.global.attributes,
     att.measurement.attributes,
@@ -1878,7 +1870,7 @@ measureGrp =
 date =
   
   ## contains a date in any format. [3.5.4. Dates and Times 2.2.4. Publication, Distribution, Licensing, etc. 2.6. The Revision Description 3.11.2.4. Imprint, Size of a Document, and Reprint Information 15.2.3. The Setting Description 13.3.6. Dates and Times]
-  element tei:date {
+  element date {
     (text | model.gLike | model.phrase | model.global)*,
     att.global.attributes,
     att.editLike.attributes,
@@ -1888,7 +1880,7 @@ date =
 time =
   
   ## contains a phrase defining a time of day in any format. [3.5.4. Dates and Times]
-  element tei:time {
+  element time {
     (text | model.gLike | model.phrase | model.global)*,
     att.global.attributes,
     att.editLike.attributes,
@@ -1898,7 +1890,7 @@ time =
 abbr =
   
   ## (abbreviation) contains an abbreviation of any sort. [3.5.5. Abbreviations and Their Expansions]
-  element tei:abbr {
+  element abbr {
     macro.phraseSeq,
     att.global.attributes,
     att.source.attributes,
@@ -1912,7 +1904,7 @@ abbr =
 expan =
   
   ## (expansion) contains the expansion of an abbreviation. [3.5.5. Abbreviations and Their Expansions]
-  element tei:expan {
+  element expan {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -1921,7 +1913,7 @@ expan =
 ptr =
   
   ## (pointer) defines a pointer to another location. [3.6. Simple Links and Cross-References 16.1. Links]
-  element tei:ptr {
+  element ptr {
     empty
     >> sch:pattern [
          id = "TBXinTEI-ptr-ptrAtts-constraint-3"
@@ -1954,7 +1946,7 @@ ptr =
 ref =
   
   ## (reference) defines a reference to another location, possibly modified by additional text or comment. [3.6. Simple Links and Cross-References 16.1. Links]
-  element tei:ref {
+  element ref {
     macro.paraContent
     >> sch:pattern [
          id = "TBXinTEI-ref-refAtts-constraint-4"
@@ -1988,7 +1980,7 @@ ref =
 \list =
   
   ## contains any sequence of items organized as a list. [3.7. Lists]
-  element tei:list {
+  element list {
     ((model.divTop | model.global)*,
      ((item, model.global*)+
       | (headLabel?,
@@ -2042,7 +2034,7 @@ ref =
 item =
   
   ## contains one component of a list. [3.7. Lists 2.6. The Revision Description]
-  element tei:item {
+  element item {
     macro.specialPara,
     att.global.attributes,
     att.sortable.attributes,
@@ -2051,7 +2043,7 @@ item =
 label =
   
   ## contains any label or heading used to identify part of a text, typically but not exclusively in a list or glossary. [3.7. Lists]
-  element tei:label {
+  element label {
     macro.phraseSeq,
     att.global.attributes,
     att.typed.attributes,
@@ -2061,7 +2053,7 @@ label =
 head =
   
   ## (heading) contains any type of heading, for example the title of a section, or the heading of a list, glossary, manuscript description, etc. [4.2.1. Headings and Trailers]
-  element tei:head {
+  element head {
     (text
      | lg
      | model.gLike
@@ -2076,17 +2068,15 @@ head =
 headLabel =
   
   ## (heading for list labels) contains the heading for the label or term column in a glossary list or similar structured list. [3.7. Lists]
-  element tei:headLabel {
-    macro.phraseSeq, att.global.attributes, empty
-  }
+  element headLabel { macro.phraseSeq, att.global.attributes, empty }
 headItem =
   
   ## (heading for list items) contains the heading for the item or gloss column in a glossary list or similar structured list. [3.7. Lists]
-  element tei:headItem { macro.phraseSeq, att.global.attributes, empty }
+  element headItem { macro.phraseSeq, att.global.attributes, empty }
 note =
   
   ## contains a note or annotation. [3.8.1. Notes and Simple Annotation 2.2.6. The Notes Statement 3.11.2.8. Notes and Statement of Language 9.3.5.4. Notes within Entries]
-  element tei:note {
+  element note {
     macro.specialPara,
     att.global.attributes,
     att.placement.attributes,
@@ -2106,7 +2096,7 @@ note =
 index =
   
   ## (index entry) marks a location to be indexed for whatever purpose. [3.8.2. Index Entries]
-  element tei:index {
+  element index {
     (term, index?)*,
     att.global.attributes,
     att.spanning.attributes,
@@ -2118,7 +2108,7 @@ index =
 media =
   
   ## indicates the location of any form of external media such as an audio or video clip etc. [3.9. Graphics and Other Non-textual Components]
-  element tei:media {
+  element media {
     model.descLike*,
     att.typed.attributes,
     att.global.attributes,
@@ -2137,7 +2127,7 @@ media =
 graphic =
   
   ## indicates the location of an inline graphic, illustration, or figure. [3.9. Graphics and Other Non-textual Components]
-  element tei:graphic {
+  element graphic {
     model.descLike*,
     att.global.attributes,
     att.media.attributes,
@@ -2147,7 +2137,7 @@ graphic =
 binaryObject =
   
   ## provides encoded binary data representing an inline graphic, audio, video or other object. [3.9. Graphics and Other Non-textual Components]
-  element tei:binaryObject {
+  element binaryObject {
     text,
     att.global.attributes,
     att.media.attributes,
@@ -2164,7 +2154,7 @@ milestone =
   
   ## marks a boundary point separating any kind of section of a text, typically but not necessarily indicating a point at which some part of a standard reference system changes, where the change is not represented by a structural element. [3.10.3. Milestone
   ## Elements]
-  element tei:milestone {
+  element milestone {
     empty,
     att.global.attributes,
     att.milestoneUnit.attributes,
@@ -2178,7 +2168,7 @@ gb =
   
   ## (gathering begins) marks the point in a transcribed codex at which a new gathering or quire begins. [3.10.3. Milestone
   ## Elements]
-  element tei:gb {
+  element gb {
     empty,
     att.global.attributes,
     att.typed.attributes,
@@ -2190,7 +2180,7 @@ pb =
   
   ## (page break) marks the start of a new page in a paginated document. [3.10.3. Milestone
   ## Elements]
-  element tei:pb {
+  element pb {
     empty,
     att.global.attributes,
     att.typed.attributes,
@@ -2203,7 +2193,7 @@ lb =
   
   ## (line break) marks the start of a new (typographic) line in some edition or version of a text. [3.10.3. Milestone
   ## Elements 7.2.5. Speech Contents]
-  element tei:lb {
+  element lb {
     empty,
     att.global.attributes,
     att.typed.attributes,
@@ -2216,7 +2206,7 @@ cb =
   
   ## (column break) marks the beginning of a new column of a text on a multi-column page. [3.10.3. Milestone
   ## Elements]
-  element tei:cb {
+  element cb {
     empty,
     att.global.attributes,
     att.typed.attributes,
@@ -2228,7 +2218,7 @@ cb =
 analytic =
   
   ## (analytic level) contains bibliographic elements describing an item (e.g. an article or poem) published within a monograph or journal and not as an independent publication. [3.11.2.1. Analytic, Monographic, and Series Levels]
-  element tei:analytic {
+  element analytic {
     (author
      | editor
      | respStmt
@@ -2244,7 +2234,7 @@ analytic =
 monogr =
   
   ## (monographic level) contains bibliographic elements describing an item (e.g. a book or journal) published as an independent item (i.e. as a separate physical object). [3.11.2.1. Analytic, Monographic, and Series Levels]
-  element tei:monogr {
+  element monogr {
     ((((author | editor | meeting | respStmt),
        (author | editor | meeting | respStmt)*,
        title+,
@@ -2264,7 +2254,7 @@ monogr =
 series =
   
   ## (series information) contains information about the series in which a book or other bibliographic item has appeared. [3.11.2.1. Analytic, Monographic, and Series Levels]
-  element tei:series {
+  element series {
     (text
      | model.gLike
      | title
@@ -2282,19 +2272,19 @@ series =
 author =
   
   ## in a bibliographic reference, contains the name(s) of an author, personal or corporate, of a work; for example in the same form as that provided by a recognized bibliographic name authority. [3.11.2.2. Titles, Authors, and Editors 2.2.1. The Title Statement]
-  element tei:author {
+  element author {
     macro.phraseSeq, att.global.attributes, att.naming.attributes, empty
   }
 editor =
   
   ## contains a secondary statement of responsibility for a bibliographic item, for example the name of an individual, institution or organization, (or of several such) acting as editor, compiler, translator, etc. [3.11.2.2. Titles, Authors, and Editors]
-  element tei:editor {
+  element editor {
     macro.phraseSeq, att.global.attributes, att.naming.attributes, empty
   }
 respStmt =
   
   ## (statement of responsibility) supplies a statement of responsibility for the intellectual content of a text, edition, recording, or series, where the specialized elements for authors, editors, etc. do not suffice or do not apply. May also be used to encode information about individuals or organizations which have played a role in the production or distribution of a bibliographic work. [3.11.2.2. Titles, Authors, and Editors 2.2.1. The Title Statement 2.2.2. The Edition Statement 2.2.5. The Series Statement]
-  element tei:respStmt {
+  element respStmt {
     ((resp+, model.nameLike.agent+) | (model.nameLike.agent+, resp+)),
     att.global.attributes,
     att.canonical.attributes,
@@ -2303,7 +2293,7 @@ respStmt =
 resp =
   
   ## (responsibility) contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role in the production or distribution of a work. [3.11.2.2. Titles, Authors, and Editors 2.2.1. The Title Statement 2.2.2. The Edition Statement 2.2.5. The Series Statement]
-  element tei:resp {
+  element resp {
     macro.phraseSeq.limited,
     att.global.attributes,
     att.canonical.attributes,
@@ -2312,7 +2302,7 @@ resp =
 title =
   
   ## contains a title for any kind of work. [3.11.2.2. Titles, Authors, and Editors 2.2.1. The Title Statement 2.2.5. The Series Statement]
-  element tei:title {
+  element title {
     macro.paraContent,
     att.global.attributes,
     att.canonical.attributes,
@@ -2345,7 +2335,7 @@ title =
 meeting =
   
   ## contains the formalized descriptive title for a meeting or conference, for use in a bibliographic description for an item derived from such a meeting, or as a heading or preamble to publications emanating from it. [3.11.2.2. Titles, Authors, and Editors]
-  element tei:meeting {
+  element meeting {
     macro.limitedContent,
     att.global.attributes,
     att.canonical.attributes,
@@ -2354,7 +2344,7 @@ meeting =
 imprint =
   
   ## groups information relating to the publication or distribution of a bibliographic item. [3.11.2.4. Imprint, Size of a Document, and Reprint Information]
-  element tei:imprint {
+  element imprint {
     ((classCode | catRef)*,
      ((model.imprintPart | model.dateLike), respStmt*, model.global*)+),
     att.global.attributes,
@@ -2363,19 +2353,17 @@ imprint =
 publisher =
   
   ## provides the name of the organization responsible for the publication or distribution of a bibliographic item. [3.11.2.4. Imprint, Size of a Document, and Reprint Information 2.2.4. Publication, Distribution, Licensing, etc.]
-  element tei:publisher {
-    macro.phraseSeq, att.global.attributes, empty
-  }
+  element publisher { macro.phraseSeq, att.global.attributes, empty }
 biblScope =
   
   ## (scope of bibliographic reference) defines the scope of a bibliographic reference, for example as a list of page numbers, or a named subdivision of a larger work. [3.11.2.5. Scopes and Ranges in Bibliographic Citations]
-  element tei:biblScope {
+  element biblScope {
     macro.phraseSeq, att.global.attributes, att.citing.attributes, empty
   }
 citedRange =
   
   ## (cited range) defines the range of cited content, often represented by pages or other units [3.11.2.5. Scopes and Ranges in Bibliographic Citations]
-  element tei:citedRange {
+  element citedRange {
     macro.phraseSeq,
     att.global.attributes,
     att.pointing.attributes,
@@ -2385,13 +2373,13 @@ citedRange =
 pubPlace =
   
   ## (publication place) contains the name of the place where a bibliographic item was published. [3.11.2.4. Imprint, Size of a Document, and Reprint Information]
-  element tei:pubPlace {
+  element pubPlace {
     macro.phraseSeq, att.global.attributes, att.naming.attributes, empty
   }
 bibl =
   
   ## (bibliographic citation) contains a loosely-structured bibliographic citation of which the sub-components may or may not be explicitly tagged. [3.11.1. Methods of Encoding Bibliographic References and Lists of References 2.2.7. The Source Description 15.3.2. Declarable Elements]
-  element tei:bibl {
+  element bibl {
     (text
      | model.gLike
      | model.highlighted
@@ -2411,7 +2399,7 @@ bibl =
 biblStruct =
   
   ## (structured bibliographic citation) contains a structured bibliographic citation, in which only bibliographic sub-elements appear and in a specified order. [3.11.1. Methods of Encoding Bibliographic References and Lists of References 2.2.7. The Source Description 15.3.2. Declarable Elements]
-  element tei:biblStruct {
+  element biblStruct {
     (analytic*,
      (monogr, series*)+,
      (model.noteLike
@@ -2449,7 +2437,7 @@ biblStruct =
 listBibl =
   
   ## (citation list) contains a list of bibliographic citations of any kind. [3.11.1. Methods of Encoding Bibliographic References and Lists of References 2.2.7. The Source Description 15.3.2. Declarable Elements]
-  element tei:listBibl {
+  element listBibl {
     (model.headLike*,
      (model.biblLike | model.milestoneLike)+,
      (relation | listRelation)*),
@@ -2462,7 +2450,7 @@ listBibl =
 relatedItem =
   
   ## contains or references some other bibliographic item which is related to the present one in some specified manner, for example as a constituent or alternative version of it. [3.11.2.7. Related Items]
-  element tei:relatedItem {
+  element relatedItem {
     ((model.biblLike | model.ptrLike)?)
     >> sch:pattern [
          id = "TBXinTEI-relatedItem-targetorcontent1-constraint-6"
@@ -2515,7 +2503,7 @@ relatedItem =
 l =
   
   ## (verse line) contains a single, possibly incomplete, line of verse. [3.12.1. Core Tags for Verse 3.12. Passages of Verse or Drama 7.2.5. Speech Contents]
-  element tei:l {
+  element l {
     ((text | model.gLike | model.phrase | model.inter | model.global)*)
     >> sch:pattern [
          id = "TBXinTEI-l-abstractModel-structure-l-constraint-7"
@@ -2545,7 +2533,7 @@ l =
 lg =
   
   ## (line group) contains one or more verse lines functioning as a formal unit, e.g. a stanza, refrain, verse paragraph, etc. [3.12.1. Core Tags for Verse 3.12. Passages of Verse or Drama 7.2.5. Speech Contents]
-  element tei:lg {
+  element lg {
     ((model.divTop | model.global)*,
      (model.lLike | model.stageLike | model.labelLike | lg),
      (model.lLike
@@ -2603,7 +2591,7 @@ lg =
 sp =
   
   ## (speech) contains an individual speech in a performance text, or a passage presented as such in a prose or verse text. [3.12.2. Core Tags for Drama 3.12. Passages of Verse or Drama 7.2.2. Speeches and Speakers]
-  element tei:sp {
+  element sp {
     (model.global*,
      (speaker, model.global*)?,
      ((lg
@@ -2620,11 +2608,11 @@ sp =
 speaker =
   
   ## contains a specialized form of heading or label, giving the name of one or more speakers in a dramatic text or fragment. [3.12.2. Core Tags for Drama]
-  element tei:speaker { macro.phraseSeq, att.global.attributes, empty }
+  element speaker { macro.phraseSeq, att.global.attributes, empty }
 stage =
   
   ## (stage direction) contains any kind of stage direction within a dramatic text or fragment. [3.12.2. Core Tags for Drama 3.12. Passages of Verse or Drama 7.2.4. Stage Directions]
-  element tei:stage {
+  element stage {
     macro.specialPara,
     att.ascribed.attributes,
     att.global.attributes,
@@ -2667,7 +2655,7 @@ stage =
 teiCorpus =
   
   ## contains the whole of a TEI encoded corpus, comprising a single corpus header and one or more TEI elements, each containing a single text header and a text. [4. Default Text Structure 15.1. Varieties of Composite Text]
-  element tei:teiCorpus {
+  element teiCorpus {
     (teiHeader,
      ((model.resourceLike+, (TEI | teiCorpus)*)
       | (TEI | teiCorpus)+)),
@@ -2680,7 +2668,7 @@ teiCorpus =
 divGen =
   
   ## (automatically generated text division) indicates the location at which a textual division generated automatically by a text-processing application is to appear. [3.8.2. Index Entries]
-  element tei:divGen {
+  element divGen {
     model.headLike*,
     att.global.attributes,
     
@@ -2692,7 +2680,7 @@ divGen =
 textLang =
   
   ## (text language) describes the languages and writing systems identified within the bibliographic work being described, rather than its description. [3.11.2.4. Imprint, Size of a Document, and Reprint Information 10.6.6. Languages and Writing Systems]
-  element tei:textLang {
+  element textLang {
     macro.phraseSeq,
     att.global.attributes,
     
@@ -2719,7 +2707,7 @@ att.patternReplacement.attribute.replacementPattern =
 teiHeader =
   
   ## (TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1. The TEI Header and Its Components 15.1. Varieties of Composite Text]
-  element tei:teiHeader {
+  element teiHeader {
     (fileDesc, model.teiHeaderPart*, revisionDesc?),
     att.global.attributes,
     
@@ -2731,7 +2719,7 @@ teiHeader =
 fileDesc =
   
   ## (file description) contains a full bibliographic description of an electronic file. [2.2. The File Description 2.1.1. The TEI Header and Its Components]
-  element tei:fileDesc {
+  element fileDesc {
     ((titleStmt,
       editionStmt?,
       extent?,
@@ -2745,13 +2733,13 @@ fileDesc =
 titleStmt =
   
   ## (title statement) groups information about the title of a work and those responsible for its content. [2.2.1. The Title Statement 2.2. The File Description]
-  element tei:titleStmt {
+  element titleStmt {
     (title+, model.respLike*), att.global.attributes, empty
   }
 sponsor =
   
   ## specifies the name of a sponsoring organization or institution. [2.2.1. The Title Statement]
-  element tei:sponsor {
+  element sponsor {
     macro.phraseSeq.limited,
     att.global.attributes,
     att.canonical.attributes,
@@ -2760,7 +2748,7 @@ sponsor =
 funder =
   
   ## (funding body) specifies the name of an individual, institution, or organization responsible for the funding of a project or text. [2.2.1. The Title Statement]
-  element tei:funder {
+  element funder {
     macro.phraseSeq.limited,
     att.global.attributes,
     att.canonical.attributes,
@@ -2769,7 +2757,7 @@ funder =
 principal =
   
   ## (principal researcher) supplies the name of the principal researcher responsible for the creation of an electronic text. [2.2.1. The Title Statement]
-  element tei:principal {
+  element principal {
     macro.phraseSeq.limited,
     att.global.attributes,
     att.canonical.attributes,
@@ -2778,7 +2766,7 @@ principal =
 editionStmt =
   
   ## (edition statement) groups information relating to one edition of a text. [2.2.2. The Edition Statement 2.2. The File Description]
-  element tei:editionStmt {
+  element editionStmt {
     (model.pLike+ | (edition, model.respLike*)),
     att.global.attributes,
     empty
@@ -2786,15 +2774,15 @@ editionStmt =
 edition =
   
   ## describes the particularities of one edition of a text. [2.2.2. The Edition Statement]
-  element tei:edition { macro.phraseSeq, att.global.attributes, empty }
+  element edition { macro.phraseSeq, att.global.attributes, empty }
 extent =
   
   ## describes the approximate size of a text stored on some carrier medium or of some other object, digital or non-digital, specified in any convenient units. [2.2.3. Type and Extent of File 2.2. The File Description 3.11.2.4. Imprint, Size of a Document, and Reprint Information 10.7.1. Object Description]
-  element tei:extent { macro.phraseSeq, att.global.attributes, empty }
+  element extent { macro.phraseSeq, att.global.attributes, empty }
 publicationStmt =
   
   ## (publication statement) groups information concerning the publication or distribution of an electronic or other text. [2.2.4. Publication, Distribution, Licensing, etc. 2.2. The File Description]
-  element tei:publicationStmt {
+  element publicationStmt {
     ((model.publicationStmtPart.agency,
       model.publicationStmtPart.detail*)+
      | model.pLike+),
@@ -2804,19 +2792,17 @@ publicationStmt =
 distributor =
   
   ## supplies the name of a person or other agency responsible for the distribution of a text. [2.2.4. Publication, Distribution, Licensing, etc.]
-  element tei:distributor {
-    macro.phraseSeq, att.global.attributes, empty
-  }
+  element distributor { macro.phraseSeq, att.global.attributes, empty }
 authority =
   
   ## (release authority) supplies the name of a person or other agency responsible for making a work available, other than a publisher or distributor. [2.2.4. Publication, Distribution, Licensing, etc.]
-  element tei:authority {
+  element authority {
     macro.phraseSeq.limited, att.global.attributes, empty
   }
 idno =
   
   ## (identifier) supplies any form of identifier used to identify some object, such as a bibliographic item, a person, a title, an organization, etc. in a standardized way. [2.2.4. Publication, Distribution, Licensing, etc. 2.2.5. The Series Statement 3.11.2.4. Imprint, Size of a Document, and Reprint Information]
-  element tei:idno {
+  element idno {
     (text | model.gLike | idno)*,
     att.global.attributes,
     att.sortable.attributes,
@@ -2828,7 +2814,7 @@ idno =
 availability =
   
   ## supplies information about the availability of a text, for example any restrictions on its use or distribution, its copyright status, any licence applying to it, etc. [2.2.4. Publication, Distribution, Licensing, etc.]
-  element tei:availability {
+  element availability {
     (model.availabilityPart | model.pLike)+,
     att.global.attributes,
     att.declarable.attributes,
@@ -2851,7 +2837,7 @@ availability =
 licence =
   
   ## contains information about a licence or other legal agreement applicable to the text. [2.2.4. Publication, Distribution, Licensing, etc.]
-  element tei:licence {
+  element licence {
     macro.specialPara,
     att.global.attributes,
     att.pointing.attributes,
@@ -2860,7 +2846,7 @@ licence =
 seriesStmt =
   
   ## (series statement) groups information about the series, if any, to which a publication belongs. [2.2.5. The Series Statement 2.2. The File Description]
-  element tei:seriesStmt {
+  element seriesStmt {
     (model.pLike+
      | (title+, (editor | respStmt)*, (idno | biblScope)*)),
     att.global.attributes,
@@ -2869,13 +2855,13 @@ seriesStmt =
 notesStmt =
   
   ## (notes statement) collects together any notes providing information about a text additional to that recorded in other parts of the bibliographic description. [2.2.6. The Notes Statement 2.2. The File Description]
-  element tei:notesStmt {
+  element notesStmt {
     (model.noteLike | relatedItem)+, att.global.attributes, empty
   }
 sourceDesc =
   
   ## (source description) describes the source from which an electronic text was derived or generated, typically a bibliographic description in the case of a digitized text, or a phrase such as "born digital" for a text which has no previous existence. [2.2.7. The Source Description]
-  element tei:sourceDesc {
+  element sourceDesc {
     (model.pLike+
      | (model.biblLike | model.sourceDescPart | model.listLike)+),
     att.global.attributes,
@@ -2885,7 +2871,7 @@ sourceDesc =
 encodingDesc =
   
   ## (encoding description) documents the relationship between an electronic text and the source or sources from which it was derived. [2.3. The Encoding Description 2.1.1. The TEI Header and Its Components]
-  element tei:encodingDesc {
+  element encodingDesc {
     (model.encodingDescPart | model.pLike)+,
     att.global.attributes,
     empty
@@ -2893,7 +2879,7 @@ encodingDesc =
 projectDesc =
   
   ## (project description) describes in detail the aim or purpose for which an electronic file was encoded, together with any other relevant information concerning the process by which it was assembled or collected. [2.3.1. The Project Description 2.3. The Encoding Description 15.3.2. Declarable Elements]
-  element tei:projectDesc {
+  element projectDesc {
     model.pLike+,
     att.global.attributes,
     att.declarable.attributes,
@@ -2902,7 +2888,7 @@ projectDesc =
 samplingDecl =
   
   ## (sampling declaration) contains a prose description of the rationale and methods used in sampling texts in the creation of a corpus or collection. [2.3.2. The Sampling Declaration 2.3. The Encoding Description 15.3.2. Declarable Elements]
-  element tei:samplingDecl {
+  element samplingDecl {
     model.pLike+,
     att.global.attributes,
     att.declarable.attributes,
@@ -2911,7 +2897,7 @@ samplingDecl =
 editorialDecl =
   
   ## (editorial practice declaration) provides details of editorial principles and practices applied during the encoding of a text. [2.3.3. The Editorial Practices Declaration 2.3. The Encoding Description 15.3.2. Declarable Elements]
-  element tei:editorialDecl {
+  element editorialDecl {
     (model.pLike | model.editorialDeclPart)+,
     att.global.attributes,
     att.declarable.attributes,
@@ -2920,7 +2906,7 @@ editorialDecl =
 correction =
   
   ## (correction principles) states how and under what circumstances corrections have been made in the text. [2.3.3. The Editorial Practices Declaration 15.3.2. Declarable Elements]
-  element tei:correction {
+  element correction {
     model.pLike+,
     att.global.attributes,
     att.declarable.attributes,
@@ -2957,7 +2943,7 @@ correction =
 normalization =
   
   ## indicates the extent of normalization or regularization of the original source carried out in converting it to electronic form. [2.3.3. The Editorial Practices Declaration 15.3.2. Declarable Elements]
-  element tei:normalization {
+  element normalization {
     model.pLike+,
     att.global.attributes,
     att.declarable.attributes,
@@ -2980,7 +2966,7 @@ normalization =
 quotation =
   
   ## specifies editorial practice adopted with respect to quotation marks in the original. [2.3.3. The Editorial Practices Declaration 15.3.2. Declarable Elements]
-  element tei:quotation {
+  element quotation {
     (model.pLike*)
     >> sch:pattern [
          id = "TBXinTEI-quotation-quotationContents-constraint-9"
@@ -3023,7 +3009,7 @@ quotation =
 hyphenation =
   
   ## summarizes the way in which hyphenation in a source text has been treated in an encoded version of it. [2.3.3. The Editorial Practices Declaration 15.3.2. Declarable Elements]
-  element tei:hyphenation {
+  element hyphenation {
     model.pLike+,
     att.global.attributes,
     att.declarable.attributes,
@@ -3049,7 +3035,7 @@ hyphenation =
 segmentation =
   
   ## describes the principles according to which the text has been segmented, for example into sentences, tone-units, graphemic strata, etc. [2.3.3. The Editorial Practices Declaration 15.3.2. Declarable Elements]
-  element tei:segmentation {
+  element segmentation {
     model.pLike+,
     att.global.attributes,
     att.declarable.attributes,
@@ -3058,7 +3044,7 @@ segmentation =
 stdVals =
   
   ## (standard values) specifies the format used when standardized date or number values are supplied. [2.3.3. The Editorial Practices Declaration 15.3.2. Declarable Elements]
-  element tei:stdVals {
+  element stdVals {
     model.pLike+,
     att.global.attributes,
     att.declarable.attributes,
@@ -3067,7 +3053,7 @@ stdVals =
 interpretation =
   
   ## describes the scope of any analytic or interpretive information added to the text in addition to the transcription. [2.3.3. The Editorial Practices Declaration]
-  element tei:interpretation {
+  element interpretation {
     model.pLike+,
     att.global.attributes,
     att.declarable.attributes,
@@ -3076,7 +3062,7 @@ interpretation =
 punctuation =
   
   ## specifies editorial practice adopted with respect to punctuation marks in the original. [2.3.3. The Editorial Practices Declaration 3.2. Treatment of Punctuation]
-  element tei:punctuation {
+  element punctuation {
     model.pLike*,
     att.declarable.attributes,
     att.global.attributes,
@@ -3108,7 +3094,7 @@ punctuation =
 tagsDecl =
   
   ## (tagging declaration) provides detailed information about the tagging applied to a document. [2.3.4. The Tagging Declaration 2.3. The Encoding Description]
-  element tei:tagsDecl {
+  element tagsDecl {
     (rendition*, \namespace*),
     att.global.attributes,
     
@@ -3119,7 +3105,7 @@ tagsDecl =
 tagUsage =
   
   ## supplies information about the usage of a specific element within a text. [2.3.4. The Tagging Declaration]
-  element tei:tagUsage {
+  element tagUsage {
     macro.limitedContent,
     att.global.attributes,
     
@@ -3141,7 +3127,7 @@ tagUsage =
 \namespace =
   
   ## supplies the formal name of the namespace to which the elements documented by its children belong. [2.3.4. The Tagging Declaration]
-  element tei:namespace {
+  element namespace {
     tagUsage+,
     att.global.attributes,
     
@@ -3152,7 +3138,7 @@ tagUsage =
 rendition =
   
   ## supplies information about the rendition or appearance of one or more elements in the source text. [2.3.4. The Tagging Declaration]
-  element tei:rendition {
+  element rendition {
     macro.limitedContent,
     att.global.attributes,
     att.styleDef.attributes,
@@ -3168,7 +3154,7 @@ rendition =
 styleDefDecl =
   
   ## (style definition language declaration) specifies the name of the formal language in which style or renditional information is supplied elsewhere in the document. The specific version of the scheme may also be supplied. [2.3.5. The Default Style Definition Language Declaration]
-  element tei:styleDefDecl {
+  element styleDefDecl {
     model.pLike*,
     att.global.attributes,
     att.declarable.attributes,
@@ -3178,7 +3164,7 @@ styleDefDecl =
 refsDecl =
   
   ## (references declaration) specifies how canonical references are constructed for this text. [2.3.6.3. Milestone Method 2.3. The Encoding Description 2.3.6. The Reference System Declaration]
-  element tei:refsDecl {
+  element refsDecl {
     (model.pLike+ | cRefPattern+ | refState+),
     att.global.attributes,
     att.declarable.attributes,
@@ -3187,7 +3173,7 @@ refsDecl =
 cRefPattern =
   
   ## (canonical reference pattern) specifies an expression and replacement pattern for transforming a canonical reference into a URI. [2.3.6.3. Milestone Method 2.3.6. The Reference System Declaration 2.3.6.2. Search-and-Replace Method]
-  element tei:cRefPattern {
+  element cRefPattern {
     model.pLike*,
     att.global.attributes,
     att.patternReplacement.attributes,
@@ -3196,7 +3182,7 @@ cRefPattern =
 prefixDef =
   
   ## (prefixing scheme used in data.pointer values) defines a prefixing scheme used in data.pointer values, showing how abbreviated URIs using the scheme may be expanded into full URIs. [16.2.3. Using Abbreviated Pointers]
-  element tei:prefixDef {
+  element prefixDef {
     model.pLike*,
     att.global.attributes,
     att.patternReplacement.attributes,
@@ -3208,13 +3194,13 @@ prefixDef =
 listPrefixDef =
   
   ## (list of prefix definitions) contains a list of definitions of prefixing schemes used in data.pointer values, showing how abbreviated URIs using each scheme may be expanded into full URIs. [16.2.3. Using Abbreviated Pointers]
-  element tei:listPrefixDef {
+  element listPrefixDef {
     (prefixDef | listPrefixDef)+, att.global.attributes, empty
   }
 refState =
   
   ## (reference state) specifies one component of a canonical reference defined by the milestone method. [2.3.6.3. Milestone Method 2.3.6. The Reference System Declaration]
-  element tei:refState {
+  element refState {
     empty,
     att.global.attributes,
     att.milestoneUnit.attributes,
@@ -3230,11 +3216,11 @@ refState =
 classDecl =
   
   ## (classification declarations) contains one or more taxonomies defining any classificatory codes used elsewhere in the text. [2.3.7. The Classification Declaration 2.3. The Encoding Description]
-  element tei:classDecl { taxonomy+, att.global.attributes, empty }
+  element classDecl { taxonomy+, att.global.attributes, empty }
 taxonomy =
   
   ## defines a typology either implicitly, by means of a bibliographic citation, or explicitly by a structured taxonomy. [2.3.7. The Classification Declaration]
-  element tei:taxonomy {
+  element taxonomy {
     ((model.glossLike | model.descLike)*
      | category+
      | (model.biblLike, category*)),
@@ -3244,7 +3230,7 @@ taxonomy =
 category =
   
   ## contains an individual descriptive category, possibly nested within a superordinate category, within a user-defined taxonomy. [2.3.7. The Classification Declaration]
-  element tei:category {
+  element category {
     ((catDesc+ | (model.descLike | model.glossLike)*),
      category*),
     att.global.attributes,
@@ -3253,7 +3239,7 @@ category =
 catDesc =
   
   ## (category description) describes some category within a taxonomy or text typology, either in the form of a brief prose description or in terms of the situational parameters used by the TEI formal textDesc. [2.3.7. The Classification Declaration]
-  element tei:catDesc {
+  element catDesc {
     (text | model.limitedPhrase | model.catDescPart)*,
     att.global.attributes,
     empty
@@ -3261,7 +3247,7 @@ catDesc =
 geoDecl =
   
   ## (geographic coordinates declaration) documents the notation and the datum used for geographic coordinates expressed as content of the geo element elsewhere within the document. [2.3.8. The Geographic Coordinates Declaration]
-  element tei:geoDecl {
+  element geoDecl {
     macro.phraseSeq,
     att.global.attributes,
     att.declarable.attributes,
@@ -3289,13 +3275,13 @@ geoDecl =
 appInfo =
   
   ## (application information) records information about an application which has edited the TEI file. [2.3.10. The Application Information Element]
-  element tei:appInfo {
+  element appInfo {
     model.applicationLike+, att.global.attributes, empty
   }
 application =
   
   ## provides information about an application which has acted upon the document. [2.3.10. The Application Information Element]
-  element tei:application {
+  element application {
     (model.labelLike+, (model.ptrLike* | model.pLike*)),
     att.global.attributes,
     att.typed.attributes,
@@ -3310,13 +3296,13 @@ application =
 profileDesc =
   
   ## (text-profile description) provides a detailed description of non-bibliographic aspects of a text, specifically the languages and sublanguages used, the situation in which it was produced, the participants and their setting. [2.4. The Profile Description 2.1.1. The TEI Header and Its Components]
-  element tei:profileDesc {
+  element profileDesc {
     model.profileDescPart*, att.global.attributes, empty
   }
 abstract =
   
   ## contains a summary or formal abstract prefixed to an existing source document by the encoder. [2.4.4. Abstracts]
-  element tei:abstract {
+  element abstract {
     (model.pLike | model.listLike)+,
     att.global.attributes,
     att.source.attributes,
@@ -3325,7 +3311,7 @@ abstract =
 creation =
   
   ## contains information about the creation of a text. [2.4.1. Creation 2.4. The Profile Description]
-  element tei:creation {
+  element creation {
     (text | model.limitedPhrase | listChange)*,
     att.global.attributes,
     empty
@@ -3333,13 +3319,13 @@ creation =
 langUsage =
   
   ## (language usage) describes the languages, sublanguages, registers, dialects, etc. represented within a text. [2.4.2. Language Usage 2.4. The Profile Description 15.3.2. Declarable Elements]
-  element tei:langUsage {
+  element langUsage {
     language+, att.global.attributes, att.declarable.attributes, empty
   }
 language =
   
   ## characterizes a single language or sublanguage used within a text. [2.4.2. Language Usage]
-  element tei:language {
+  element language {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -3355,7 +3341,7 @@ language =
 textClass =
   
   ## (text classification) groups information which describes the nature or topic of a text in terms of a standard classification scheme, thesaurus, etc. [2.4.3. The Text Classification]
-  element tei:textClass {
+  element textClass {
     (classCode | catRef | keywords)*,
     att.global.attributes,
     att.declarable.attributes,
@@ -3364,7 +3350,7 @@ textClass =
 keywords =
   
   ## contains a list of keywords or phrases identifying the topic or nature of a text. [2.4.3. The Text Classification]
-  element tei:keywords {
+  element keywords {
     (term+ | \list),
     att.global.attributes,
     
@@ -3375,7 +3361,7 @@ keywords =
 classCode =
   
   ## (classification code) contains the classification code used for this text in some standard classification system. [2.4.3. The Text Classification]
-  element tei:classCode {
+  element classCode {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -3386,7 +3372,7 @@ classCode =
 catRef =
   
   ## (category reference) specifies one or more defined categories within some taxonomy or text typology. [2.4.3. The Text Classification]
-  element tei:catRef {
+  element catRef {
     empty,
     att.global.attributes,
     att.pointing.attributes,
@@ -3398,18 +3384,18 @@ catRef =
 calendarDesc =
   
   ## (calendar description) contains a description of the calendar system used in any dating expression found in the text. [2.4. The Profile Description 2.4.5. Calendar Description]
-  element tei:calendarDesc { calendar+, att.global.attributes, empty }
+  element calendarDesc { calendar+, att.global.attributes, empty }
 calendar =
   
   ## describes a calendar or dating system used in a dating formula in the text. [2.4.5. Calendar Description]
-  element tei:calendar {
+  element calendar {
     model.pLike+, att.global.attributes, att.pointing.attributes, empty
   }
 correspDesc =
   
   ## (correspondence
   ##     description) contains a description of the actions related to one act of correspondence [2.4.6. Correspondence Description]
-  element tei:correspDesc {
+  element correspDesc {
     (model.correspDescPart+ | model.pLike+),
     att.declarable.attributes,
     att.canonical.attributes,
@@ -3420,7 +3406,7 @@ correspDesc =
 correspAction =
   
   ## contains a structured description of the place, the name of a person/organization and the date related to the sending/receiving of a message or any other action related to the correspondence [2.4.6. Correspondence Description]
-  element tei:correspAction {
+  element correspAction {
     (model.correspActionPart+ | model.pLike+),
     att.global.attributes,
     att.typed.attribute.subtype,
@@ -3451,23 +3437,13 @@ correspAction =
 correspContext =
   
   ## (correspondence context) provides references to preceding or following correspondence related to this piece of correspondence [2.4.6. Correspondence Description]
-  element tei:correspContext {
+  element correspContext {
     model.correspContextPart+, att.global.attributes, empty
-  }
-xenoData =
-  
-  ## (outside metadata) provides a container element into which metadata in non-TEI formats may be placed. [2.5. Non-TEI Metadata]
-  element tei:xenoData {
-    (text | macro.anyXML)*,
-    att.global.attributes,
-    att.declarable.attributes,
-    att.typed.attributes,
-    empty
   }
 revisionDesc =
   
   ## (revision description) summarizes the revision history for a file. [2.6. The Revision Description 2.1.1. The TEI Header and Its Components]
-  element tei:revisionDesc {
+  element revisionDesc {
     (\list | listChange | change+),
     att.global.attributes,
     att.docStatus.attributes,
@@ -3476,7 +3452,7 @@ revisionDesc =
 change =
   
   ## documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.6. The Revision Description 2.4.1. Creation 11.7. Changes]
-  element tei:change {
+  element change {
     macro.specialPara,
     att.ascribed.attributes,
     att.docStatus.attributes,
@@ -3492,7 +3468,7 @@ change =
 listChange =
   
   ## groups a number of change descriptions associated with either the creation of a source text or the revision of an encoded text. [2.6. The Revision Description 11.7. Changes]
-  element tei:listChange {
+  element listChange {
     (listChange | change)+,
     att.global.attributes,
     att.sortable.attributes,
@@ -3504,7 +3480,7 @@ listChange =
 TEI =
   
   ## (TEI document) contains a single TEI-conformant document, containing a single TEI header, a single text, one or more members of the model.resourceLike class, or a combination of these. A series of TEI elements may be combined together to form a teiCorpus element. [4. Default Text Structure 15.1. Varieties of Composite Text]
-  element tei:TEI {
+  element TEI {
     (teiHeader,
      ((model.resourceLike+, \text?) | \text))
     >> sch:ns [ prefix = "tei" uri = "http://www.tei-c.org/ns/1.0" ]
@@ -3522,7 +3498,7 @@ TEI =
 \text =
   
   ## contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]
-  element tei:text {
+  element text {
     (model.global*, (body), model.global*),
     att.global.attributes,
     att.typed.attributes,
@@ -3531,7 +3507,7 @@ TEI =
 body =
   
   ## (text body) contains the whole body of a single unitary text, excluding any front or back matter. [4. Default Text Structure]
-  element tei:body {
+  element body {
     (model.global*,
      (model.divTop, (model.global | model.divTop)*)?,
      (model.divGenLike, (model.global | model.divGenLike)*)?,
@@ -3547,7 +3523,7 @@ body =
 \div =
   
   ## (text division) contains a subdivision of the front, body, or back of a text. [4.1. Divisions of the Body]
-  element tei:div {
+  element div {
     ((model.divTop | model.global)*,
      ((((model.divLike | model.divGenLike), model.global*)+
        | ((model.common, model.global*)+,
@@ -3614,7 +3590,7 @@ model.persNamePart_sequenceRepeatable =
 orgName =
   
   ## (organization name) contains an organizational name. [13.2.2. Organizational Names]
-  element tei:orgName {
+  element orgName {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -3625,7 +3601,7 @@ orgName =
 persName =
   
   ## (personal name) contains a proper noun or proper-noun phrase referring to a person, possibly including one or more of the person's forenames, surnames, honorifics, added names, etc. [13.2.1. Personal Names]
-  element tei:persName {
+  element persName {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -3636,7 +3612,7 @@ persName =
 surname =
   
   ## contains a family (inherited) name, as opposed to a given, baptismal, or nick name. [13.2.1. Personal Names]
-  element tei:surname {
+  element surname {
     macro.phraseSeq,
     att.global.attributes,
     att.personal.attributes,
@@ -3646,7 +3622,7 @@ surname =
 forename =
   
   ## contains a forename, given or baptismal name. [13.2.1. Personal Names]
-  element tei:forename {
+  element forename {
     macro.phraseSeq,
     att.global.attributes,
     att.personal.attributes,
@@ -3656,7 +3632,7 @@ forename =
 genName =
   
   ## (generational name component) contains a name component used to distinguish otherwise similar names on the basis of the relative ages or generations of the persons named. [13.2.1. Personal Names]
-  element tei:genName {
+  element genName {
     macro.phraseSeq,
     att.global.attributes,
     att.personal.attributes,
@@ -3666,13 +3642,13 @@ genName =
 nameLink =
   
   ## (name link) contains a connecting phrase or link used within a name but not regarded as part of it, such as van der or of. [13.2.1. Personal Names]
-  element tei:nameLink {
+  element nameLink {
     macro.phraseSeq, att.global.attributes, att.typed.attributes, empty
   }
 addName =
   
   ## (additional name) contains an additional name component, such as a nickname, epithet, or alias, or any other descriptive phrase used within a personal name. [13.2.1. Personal Names]
-  element tei:addName {
+  element addName {
     macro.phraseSeq,
     att.global.attributes,
     att.personal.attributes,
@@ -3682,7 +3658,7 @@ addName =
 roleName =
   
   ## contains a name component which indicates that the referent has a particular role or position in society, such as an official title or rank. [13.2.1. Personal Names]
-  element tei:roleName {
+  element roleName {
     macro.phraseSeq,
     att.global.attributes,
     att.personal.attributes,
@@ -3692,7 +3668,7 @@ roleName =
 placeName =
   
   ## contains an absolute or relative place name. [13.2.3. Place Names]
-  element tei:placeName {
+  element placeName {
     macro.phraseSeq,
     att.editLike.attributes,
     att.global.attributes,
@@ -3703,7 +3679,7 @@ placeName =
 bloc =
   
   ## contains the name of a geo-political unit consisting of two or more nation states or countries. [13.2.3. Place Names]
-  element tei:bloc {
+  element bloc {
     macro.phraseSeq,
     att.global.attributes,
     att.naming.attributes,
@@ -3713,7 +3689,7 @@ bloc =
 country =
   
   ## contains the name of a geo-political unit, such as a nation, country, colony, or commonwealth, larger than or administratively superior to a region and smaller than a bloc. [13.2.3. Place Names]
-  element tei:country {
+  element country {
     macro.phraseSeq,
     att.global.attributes,
     att.naming.attributes,
@@ -3723,7 +3699,7 @@ country =
 region =
   
   ## contains the name of an administrative unit such as a state, province, or county, larger than a settlement, but smaller than a country. [13.2.3. Place Names]
-  element tei:region {
+  element region {
     macro.phraseSeq,
     att.global.attributes,
     att.naming.attributes,
@@ -3733,7 +3709,7 @@ region =
 district =
   
   ## contains the name of any kind of subdivision of a settlement, such as a parish, ward, or other administrative or geographic unit. [13.2.3. Place Names]
-  element tei:district {
+  element district {
     macro.phraseSeq,
     att.global.attributes,
     att.naming.attributes,
@@ -3743,7 +3719,7 @@ district =
 settlement =
   
   ## contains the name of a settlement such as a city, town, or village identified as a single geo-political or administrative unit. [13.2.3. Place Names]
-  element tei:settlement {
+  element settlement {
     macro.phraseSeq,
     att.global.attributes,
     att.naming.attributes,
@@ -3753,7 +3729,7 @@ settlement =
 offset =
   
   ## marks that part of a relative temporal or spatial expression which indicates the direction of the offset between the two place names, dates, or times involved in the expression. [13.2.3. Place Names]
-  element tei:offset {
+  element offset {
     macro.phraseSeq,
     att.editLike.attributes,
     att.global.attributes,
@@ -3764,7 +3740,7 @@ offset =
 geogName =
   
   ## (geographical name) identifies a name associated with some geographical feature such as Windrush Valley or Mount Sinai. [13.2.3. Place Names]
-  element tei:geogName {
+  element geogName {
     macro.phraseSeq,
     att.editLike.attributes,
     att.global.attributes,
@@ -3775,7 +3751,7 @@ geogName =
 geogFeat =
   
   ## (geographical feature name) contains a common noun identifying some geographical feature contained within a geographic name, such as valley, mount, etc. [13.2.3. Place Names]
-  element tei:geogFeat {
+  element geogFeat {
     macro.phraseSeq,
     att.editLike.attributes,
     att.global.attributes,
@@ -3786,7 +3762,7 @@ geogFeat =
 affiliation =
   
   ## contains an informal description of a person's present or past affiliation with some organization, for example an employer or sponsor. [15.2.2. The Participant Description]
-  element tei:affiliation {
+  element affiliation {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -3796,7 +3772,7 @@ affiliation =
 age =
   
   ## specifies the age of a person. [13.3.2.1. Personal Characteristics]
-  element tei:age {
+  element age {
     macro.phraseSeq.limited,
     att.global.attributes,
     att.editLike.attributes,
@@ -3808,7 +3784,7 @@ age =
 birth =
   
   ## contains information about a person's birth, such as its date and place. [15.2.2. The Participant Description]
-  element tei:birth {
+  element birth {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -3818,7 +3794,7 @@ birth =
 climate =
   
   ## contains information about the physical climate of a place. [13.3.4.3. States, Traits, and Events]
-  element tei:climate {
+  element climate {
     (model.headLike*,
      (model.pLike+ | model.labelLike+),
      (model.noteLike | model.biblLike)*,
@@ -3832,7 +3808,7 @@ climate =
 death =
   
   ## contains information about a person's death, such as its date and place. [15.2.2. The Participant Description]
-  element tei:death {
+  element death {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -3842,7 +3818,7 @@ death =
 education =
   
   ## contains a description of the educational experience of a person. [15.2.2. The Participant Description]
-  element tei:education {
+  element education {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -3852,7 +3828,7 @@ education =
 event =
   
   ## contains data relating to any kind of significant event associated with a person, place, or organization. [13.3.1. Basic Principles]
-  element tei:event {
+  element event {
     (model.headLike*,
      (model.pLike+ | model.labelLike+),
      (model.noteLike | model.biblLike | linkGrp | link)*,
@@ -3870,7 +3846,7 @@ event =
 faith =
   
   ## specifies the faith, religion, or belief set of a person. [13.3.2.1. Personal Characteristics]
-  element tei:faith {
+  element faith {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -3880,7 +3856,7 @@ faith =
 floruit =
   
   ## contains information about a person's period of activity. [13.3.2.1. Personal Characteristics]
-  element tei:floruit {
+  element floruit {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -3889,11 +3865,11 @@ floruit =
 geo =
   
   ## (geographical coordinates) contains any expression of a set of geographic coordinates, representing a point, line, or area on the surface of the earth in some notation. [13.3.4.1. Varieties of Location]
-  element tei:geo { text, att.global.attributes, empty }
+  element geo { text, att.global.attributes, empty }
 langKnowledge =
   
   ## (language knowledge) summarizes the state of a person's linguistic knowledge, either as prose or by a list of langKnown elements. [13.3.2.1. Personal Characteristics]
-  element tei:langKnowledge {
+  element langKnowledge {
     (model.pLike | langKnown+),
     att.global.attributes,
     att.editLike.attributes,
@@ -3907,7 +3883,7 @@ langKnowledge =
 langKnown =
   
   ## (language known) summarizes the state of a person's linguistic competence, i.e., knowledge of a single language. [15.2.2. The Participant Description]
-  element tei:langKnown {
+  element langKnown {
     macro.phraseSeq.limited,
     att.global.attributes,
     att.editLike.attributes,
@@ -3922,7 +3898,7 @@ langKnown =
 listOrg =
   
   ## (list of organizations) contains a list of elements, each of which provides information about an identifiable organization. [13.2.2. Organizational Names]
-  element tei:listOrg {
+  element listOrg {
     (model.headLike*, (org | listOrg)+, (relation | listRelation)*),
     att.global.attributes,
     att.typed.attributes,
@@ -3933,7 +3909,7 @@ listOrg =
 listEvent =
   
   ## (list of events) contains a list of descriptions, each of which provides information about an identifiable event. [13.3.1. Basic Principles]
-  element tei:listEvent {
+  element listEvent {
     (model.headLike*, (event | listEvent)+, (relation | listRelation)*),
     att.global.attributes,
     att.typed.attributes,
@@ -3944,7 +3920,7 @@ listEvent =
 listPerson =
   
   ## (list of persons) contains a list of descriptions, each of which provides information about an identifiable person or a group of people, for example the participants in a language interaction, or the people referred to in a historical source. [13.3.2. The Person Element 15.2. Contextual Information 2.4. The Profile Description 15.3.2. Declarable Elements]
-  element tei:listPerson {
+  element listPerson {
     (model.headLike*,
      (model.personLike | listPerson)+,
      (relation | listRelation)*),
@@ -3957,7 +3933,7 @@ listPerson =
 listPlace =
   
   ## (list of places) contains a list of places, optionally followed by a list of relationships (other than containment) defined amongst them. [2.2.7. The Source Description 13.3.4. Places]
-  element tei:listPlace {
+  element listPlace {
     (model.headLike*,
      (model.placeLike | listPlace)+,
      (relation | listRelation)*),
@@ -3970,7 +3946,7 @@ listPlace =
 location =
   
   ## defines the location of a place as a set of geographical coordinates, in terms of other named geo-political entities, or as an address. [13.3.4. Places]
-  element tei:location {
+  element location {
     (model.labelLike
      | model.placeNamePart
      | model.offsetLike
@@ -3986,7 +3962,7 @@ location =
 nationality =
   
   ## contains an informal description of a person's present or past nationality or citizenship. [15.2.2. The Participant Description]
-  element tei:nationality {
+  element nationality {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -3996,7 +3972,7 @@ nationality =
 occupation =
   
   ## contains an informal description of a person's trade, profession or occupation. [15.2.2. The Participant Description]
-  element tei:occupation {
+  element occupation {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -4012,7 +3988,7 @@ occupation =
 org =
   
   ## (organization) provides information about an identifiable organization such as a business, a tribe, or any other grouping of people. [13.2.2. Organizational Names]
-  element tei:org {
+  element org {
     (model.headLike*,
      (model.pLike*
       | (model.labelLike
@@ -4036,7 +4012,7 @@ org =
 listRelation =
   
   ## provides information about relationships identified amongst people, places, and organizations, either informally as prose or as formally expressed relation links. [13.3.2.3. Personal Relationships]
-  element tei:listRelation {
+  element listRelation {
     (model.headLike*,
      (model.pLike | (relation | listRelation)+)),
     att.global.attributes,
@@ -4047,7 +4023,7 @@ listRelation =
 person =
   
   ## provides information about an identifiable individual, for example a participant in a language interaction, or a person referred to in a historical source. [13.3.2. The Person Element 15.2.2. The Participant Description]
-  element tei:person {
+  element person {
     (model.pLike+ | (model.personPart | model.global)*),
     att.global.attributes,
     att.editLike.attributes,
@@ -4070,7 +4046,7 @@ person =
 personGrp =
   
   ## (personal group) describes a group of individuals treated as a single person for analytic purposes. [15.2.2. The Participant Description]
-  element tei:personGrp {
+  element personGrp {
     (model.pLike+ | (model.personPart | model.global)*),
     att.global.attributes,
     att.sortable.attributes,
@@ -4095,7 +4071,7 @@ personGrp =
 place =
   
   ## contains data about a geographic location [13.3.4. Places]
-  element tei:place {
+  element place {
     (model.headLike*,
      (model.pLike*
       | (model.labelLike | model.placeStateLike | model.eventLike)*),
@@ -4110,7 +4086,7 @@ place =
 population =
   
   ## contains information about the population of a place. [13.3.4.3. States, Traits, and Events]
-  element tei:population {
+  element population {
     (model.headLike*,
      ((model.pLike+ | model.labelLike+),
       (model.noteLike | model.biblLike)*)?,
@@ -4124,7 +4100,7 @@ population =
 relation =
   
   ## (relationship) describes any kind of relationship or linkage amongst a specified group of places, events, persons, objects or other items. [13.3.2.3. Personal Relationships]
-  element tei:relation {
+  element relation {
     (desc?)
     >> sch:pattern [
          id = "TBXinTEI-relation-reforkeyorname-constraint-8"
@@ -4211,7 +4187,7 @@ relation =
 residence =
   
   ## describes a person's present or past places of residence. [15.2.2. The Participant Description]
-  element tei:residence {
+  element residence {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -4221,7 +4197,7 @@ residence =
 sex =
   
   ## specifies the sex of a person. [13.3.2.1. Personal Characteristics]
-  element tei:sex {
+  element sex {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -4235,7 +4211,7 @@ sex =
 socecStatus =
   
   ## (socio-economic status) contains an informal description of a person's perceived social or economic status. [15.2.2. The Participant Description]
-  element tei:socecStatus {
+  element socecStatus {
     macro.phraseSeq,
     att.global.attributes,
     att.editLike.attributes,
@@ -4251,7 +4227,7 @@ socecStatus =
 state =
   
   ## contains a description of some status or quality attributed to a person, place, or organization often at some specific time or for a specific date range. [13.3.1. Basic Principles 13.3.2.1. Personal Characteristics]
-  element tei:state {
+  element state {
     (state+
      | (model.headLike*,
         model.pLike+,
@@ -4266,7 +4242,7 @@ state =
 terrain =
   
   ## contains information about the physical terrain of a place. [13.3.4.3. States, Traits, and Events]
-  element tei:terrain {
+  element terrain {
     (model.headLike*,
      (model.pLike+ | model.labelLike+),
      (model.noteLike | model.biblLike)*,
@@ -4280,7 +4256,7 @@ terrain =
 trait =
   
   ## contains a description of some status or quality attributed to a person, place, or organization typically, but not necessarily, independent of the volition or action of the holder and usually not at some specific time or for a specific date range. [13.3.1. Basic Principles 13.3.2.1. Personal Characteristics]
-  element tei:trait {
+  element trait {
     (trait+
      | (model.headLike*,
         model.pLike+,
@@ -4295,7 +4271,7 @@ trait =
 nym =
   
   ## (canonical name) contains the definition for a canonical name or name component of any kind. [13.3.5. Names and Nyms]
-  element tei:nym {
+  element nym {
     (model.entryPart*, model.pLike*, nym*),
     att.global.attributes,
     att.typed.attributes,
@@ -4310,7 +4286,7 @@ nym =
 listNym =
   
   ## (list of canonical names) contains a list of nyms, that is, standardized names for any thing. [13.3.5. Names and Nyms]
-  element tei:listNym {
+  element listNym {
     (model.headLike*, (nym | listNym)+, (relation | listRelation)*),
     att.global.attributes,
     att.typed.attributes,
@@ -4328,7 +4304,7 @@ att.global.linking.attribute.synch =
 link =
   
   ## defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements. [16.1. Links]
-  element tei:link {
+  element link {
     empty
     >> sch:pattern [
          id = "TBXinTEI-link-linkTargets3-constraint-9"
@@ -4359,7 +4335,7 @@ link =
 linkGrp =
   
   ## (link group) defines a collection of associations or hypertextual links. [16.1. Links]
-  element tei:linkGrp {
+  element linkGrp {
     (link | ptr)+,
     att.global.attributes,
     att.pointing.group.attributes,
@@ -4368,7 +4344,7 @@ linkGrp =
 ab =
   
   ## (anonymous block) contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph. [16.3. Blocks, Segments, and Anchors]
-  element tei:ab {
+  element ab {
     macro.paraContent
     >> sch:pattern [
          id = "TBXinTEI-ab-abstractModel-structure-p-constraint-14"
@@ -4419,13 +4395,13 @@ ab =
 anchor =
   
   ## (anchor point) attaches an identifier to a point within a text, whether or not it corresponds with a textual element. [8.4.2. Synchronization and Overlap 16.4. Correspondence and Alignment]
-  element tei:anchor {
+  element anchor {
     empty, att.global.attributes, att.typed.attributes, empty
   }
 seg =
   
   ## (arbitrary segment) represents any segmentation of text below the chunk level. [16.3. Blocks, Segments, and Anchors 6.2. Components of the Verse Line 7.2.5. Speech Contents]
-  element tei:seg {
+  element seg {
     macro.paraContent,
     att.global.attributes,
     att.segLike.attributes,
@@ -4436,7 +4412,7 @@ seg =
 when =
   
   ## indicates a point in time either relative to other elements in the same timeline tag, or absolutely. [16.5.2. Placing Synchronous Events in Time]
-  element tei:when {
+  element when {
     empty,
     att.global.attributes,
     
@@ -4474,7 +4450,7 @@ when =
 timeline =
   
   ## provides a set of ordered points in time which can be linked to elements of a spoken text to create a temporal alignment of that text. [16.5.2. Placing Synchronous Events in Time]
-  element tei:timeline {
+  element timeline {
     when+,
     att.global.attributes,
     
@@ -4509,7 +4485,7 @@ timeline =
 join =
   
   ## identifies a possibly fragmented segment of text, by pointing at the possibly discontiguous elements which compose it. [16.7. Aggregation]
-  element tei:join {
+  element join {
     ((model.descLike | model.certLike)*)
     >> sch:pattern [
          id = "TBXinTEI-join-joinTargets3-constraint-10"
@@ -4555,7 +4531,7 @@ join =
 joinGrp =
   
   ## (join group) groups a collection of join elements and possibly pointers. [16.7. Aggregation]
-  element tei:joinGrp {
+  element joinGrp {
     (model.glossLike*, (join | ptr)+),
     att.global.attributes,
     att.pointing.group.attributes,
@@ -4567,7 +4543,7 @@ joinGrp =
 alt =
   
   ## (alternation) identifies an alternation or a set of choices among elements or passages. [16.8. Alternation]
-  element tei:alt {
+  element alt {
     empty,
     att.global.attributes,
     att.pointing.attribute.targetLang,
@@ -4598,7 +4574,7 @@ alt =
 altGrp =
   
   ## (alternation group) groups a collection of alt elements and possibly pointers. [16.8. Alternation]
-  element tei:altGrp {
+  element altGrp {
     (alt | ptr)*,
     att.global.attributes,
     att.pointing.group.attributes,
@@ -4618,7 +4594,7 @@ altGrp =
 s =
   
   ## (s-unit) contains a sentence-like division of a text. [17.1. Linguistic Segment Categories 8.4.1. Segmentation]
-  element tei:s {
+  element s {
     ((text
       | model.gLike
       | model.global
@@ -4720,7 +4696,7 @@ s =
 cl =
   
   ## (clause) represents a grammatical clause. [17.1. Linguistic Segment Categories]
-  element tei:cl {
+  element cl {
     macro.phraseSeq,
     att.global.attributes,
     att.segLike.attributes,
@@ -4730,7 +4706,7 @@ cl =
 phr =
   
   ## (phrase) represents a grammatical phrase. [17.1. Linguistic Segment Categories]
-  element tei:phr {
+  element phr {
     macro.phraseSeq,
     att.global.attributes,
     att.segLike.attributes,
@@ -4740,7 +4716,7 @@ phr =
 w =
   
   ## (word) represents a grammatical (not necessarily orthographic) word. [17.1. Linguistic Segment Categories]
-  element tei:w {
+  element w {
     (text
      | model.gLike
      | seg
@@ -4766,7 +4742,7 @@ w =
 m =
   
   ## (morpheme) represents a grammatical morpheme. [17.1. Linguistic Segment Categories]
-  element tei:m {
+  element m {
     (text | model.gLike | model.hiLike | seg | m | c | model.global)*,
     att.global.attributes,
     att.segLike.attributes,
@@ -4779,7 +4755,7 @@ m =
 c =
   
   ## (character) represents a character. [17.1. Linguistic Segment Categories]
-  element tei:c {
+  element c {
     macro.xtext,
     att.global.attributes,
     att.segLike.attributes,
@@ -4789,7 +4765,7 @@ c =
 pc =
   
   ## (punctuation character) contains a character or string of characters regarded as constituting a single punctuation mark. [17.1. Linguistic Segment Categories]
-  element tei:pc {
+  element pc {
     (text | model.gLike | c | model.pPart.edit)*,
     att.global.attributes,
     att.segLike.attributes,
@@ -4818,7 +4794,7 @@ pc =
 span =
   
   ## associates an interpretative annotation directly with a span of text. [17.3. Spans and Interpretations]
-  element tei:span {
+  element span {
     macro.phraseSeq.limited
     >> sch:pattern [
          id = "TBXinTEI-span-targetfrom-constraint-17"
@@ -4921,13 +4897,13 @@ span =
 spanGrp =
   
   ## (span group) collects together span tags. [17.3. Spans and Interpretations]
-  element tei:spanGrp {
+  element spanGrp {
     span*, att.global.attributes, att.interpLike.attributes, empty
   }
 interp =
   
   ## (interpretation) summarizes a specific interpretative annotation which can be linked to a span of text. [17.3. Spans and Interpretations]
-  element tei:interp {
+  element interp {
     (text | model.gLike | model.descLike | model.certLike)*,
     att.global.attributes,
     att.interpLike.attributes,
@@ -4936,7 +4912,7 @@ interp =
 interpGrp =
   
   ## (interpretation group) collects together a set of related interpretations which share responsibility or type. [17.3. Spans and Interpretations]
-  element tei:interpGrp {
+  element interpGrp {
     (model.descLike*, interp+),
     att.global.attributes,
     att.interpLike.attributes,
@@ -4945,7 +4921,7 @@ interpGrp =
 textDesc =
   
   ## (text description) provides a description of a text in terms of its situational parameters. [15.2.1. The Text Description]
-  element tei:textDesc {
+  element textDesc {
     (model.textDescPart_sequence, purpose+),
     att.global.attributes,
     att.declarable.attributes,
@@ -4954,7 +4930,7 @@ textDesc =
 particDesc =
   
   ## (participation description) describes the identifiable speakers, voices, or other participants in any kind of text or other persons named or otherwise referred to in a text, edition, or metadata. [15.2. Contextual Information]
-  element tei:particDesc {
+  element particDesc {
     (model.pLike+ | (model.personLike | listPerson | listOrg)+),
     att.global.attributes,
     att.declarable.attributes,
@@ -4963,7 +4939,7 @@ particDesc =
 settingDesc =
   
   ## (setting description) describes the setting or settings within which a language interaction takes place, or other places otherwise referred to in a text, edition, or metadata. [15.2. Contextual Information 2.4. The Profile Description]
-  element tei:settingDesc {
+  element settingDesc {
     (model.pLike+ | (setting | model.placeLike | listPlace)+),
     att.global.attributes,
     att.declarable.attributes,
@@ -4972,7 +4948,7 @@ settingDesc =
 channel =
   
   ## (primary channel) describes the medium or channel by which a text is delivered or experienced. For a written text, this might be print, manuscript, email, etc.; for a spoken one, radio, telephone, face-to-face, etc. [15.2.1. The Text Description]
-  element tei:channel {
+  element channel {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -5003,7 +4979,7 @@ channel =
 constitution =
   
   ## describes the internal composition of a text or text sample, for example as fragmentary, complete, etc. [15.2.1. The Text Description]
-  element tei:constitution {
+  element constitution {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -5028,7 +5004,7 @@ constitution =
 derivation =
   
   ## describes the nature and extent of originality of this text. [15.2.1. The Text Description]
-  element tei:derivation {
+  element derivation {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -5040,7 +5016,7 @@ derivation =
 domain =
   
   ## (domain of use) describes the most important social context in which the text was realized or for which it is intended, for example private vs. public, education, religion, etc. [15.2.1. The Text Description]
-  element tei:domain {
+  element domain {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -5052,7 +5028,7 @@ domain =
 factuality =
   
   ## describes the extent to which the text may be regarded as imaginative or non-imaginative, that is, as describing a fictional or a non-fictional world. [15.2.1. The Text Description]
-  element tei:factuality {
+  element factuality {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -5076,7 +5052,7 @@ factuality =
 interaction =
   
   ## describes the extent, cardinality and nature of any interaction among those producing and experiencing the text, for example in the form of response or interjection, commentary, etc. [15.2.1. The Text Description]
-  element tei:interaction {
+  element interaction {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -5139,7 +5115,7 @@ interaction =
 preparedness =
   
   ## describes the extent to which a text may be regarded as prepared or spontaneous. [15.2.1. The Text Description]
-  element tei:preparedness {
+  element preparedness {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -5151,7 +5127,7 @@ preparedness =
 purpose =
   
   ## characterizes a single purpose or communicative function of the text. [15.2.1. The Text Description]
-  element tei:purpose {
+  element purpose {
     macro.phraseSeq.limited,
     att.global.attributes,
     
@@ -5180,7 +5156,7 @@ purpose =
 setting =
   
   ## describes one particular setting in which a language interaction takes place. [15.2.3. The Setting Description]
-  element tei:setting {
+  element setting {
     (model.pLike+
      | (model.nameLike.agent | model.dateLike | model.settingPart)*),
     att.global.attributes,
@@ -5190,13 +5166,13 @@ setting =
 locale =
   
   ## contains a brief informal description of the kind of place concerned, for example: a room, a restaurant, a park bench, etc. [15.2.3. The Setting Description]
-  element tei:locale {
+  element locale {
     macro.phraseSeq.limited, att.global.attributes, empty
   }
 activity =
   
   ## contains a brief informal description of what a participant in a language interaction is doing other than speaking, if anything. [15.2.3. The Setting Description]
-  element tei:activity {
+  element activity {
     macro.phraseSeq.limited, att.global.attributes, empty
   }
 model.entryLike = superEntry | entry | entryFree | termEntry
@@ -5291,7 +5267,7 @@ model.ptrLike.form = oRef | oVar | pRef | pVar
 superEntry =
   
   ## groups a sequence of entries within any kind of lexical resource, such as a dictionary or lexicon which function as a single unit, for example a set of homographs. [9.1. Dictionary Body and Overall Structure]
-  element tei:superEntry {
+  element superEntry {
     ((form?, entry+) | dictScrap),
     att.global.attributes,
     att.entryLike.attributes,
@@ -5301,7 +5277,7 @@ superEntry =
 entry =
   
   ## contains a single structured entry in any kind of lexical resource, such as a dictionary or lexicon. [9.1. Dictionary Body and Overall Structure 9.2. The Structure of Dictionary Entries]
-  element tei:entry {
+  element entry {
     (hom | sense | model.entryPart.top | model.global | model.ptrLike)+,
     att.global.attributes,
     att.entryLike.attributes,
@@ -5311,7 +5287,7 @@ entry =
 entryFree =
   
   ## (unstructured entry) contains a single unstructured entry in any kind of lexical resource, such as a dictionary or lexicon. [9.1. Dictionary Body and Overall Structure 9.2. The Structure of Dictionary Entries]
-  element tei:entryFree {
+  element entryFree {
     (text
      | model.gLike
      | model.entryPart
@@ -5328,7 +5304,7 @@ entryFree =
 hom =
   
   ## (homograph) groups information relating to one homograph within an entry. [9.2. The Structure of Dictionary Entries]
-  element tei:hom {
+  element hom {
     (sense | model.entryPart.top | model.global)*,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5337,7 +5313,7 @@ hom =
 sense =
   
   ## groups together all information relating to one word sense in a dictionary entry, for example definitions, examples, and translation equivalents. [9.2. The Structure of Dictionary Entries]
-  element tei:sense {
+  element sense {
     (text
      | model.gLike
      | sense
@@ -5354,7 +5330,7 @@ sense =
 dictScrap =
   
   ## (dictionary scrap) encloses a part of a dictionary entry in which other phrase-level dictionary elements are freely combined. [9.1. Dictionary Body and Overall Structure 9.2. The Structure of Dictionary Entries]
-  element tei:dictScrap {
+  element dictScrap {
     (text
      | model.gLike
      | model.entryPart
@@ -5368,7 +5344,7 @@ dictScrap =
 form =
   
   ## (form information group) groups all the information on the written and spoken forms of one headword. [9.3.1. Information on Written and Spoken Forms]
-  element tei:form {
+  element form {
     (text
      | model.gLike
      | model.phrase
@@ -5409,7 +5385,7 @@ form =
 orth =
   
   ## (orthographic form) gives the orthographic form of a dictionary headword. [9.3.1. Information on Written and Spoken Forms]
-  element tei:orth {
+  element orth {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5425,7 +5401,7 @@ orth =
 pron =
   
   ## (pronunciation) contains the pronunciation(s) of the word. [9.3.1. Information on Written and Spoken Forms]
-  element tei:pron {
+  element pron {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5441,7 +5417,7 @@ pron =
 hyph =
   
   ## (hyphenation) contains a hyphenated form of a dictionary headword, or hyphenation information in some other form. [9.3.1. Information on Written and Spoken Forms]
-  element tei:hyph {
+  element hyph {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5450,7 +5426,7 @@ hyph =
 syll =
   
   ## (syllabification) contains the syllabification of the headword. [9.3.1. Information on Written and Spoken Forms]
-  element tei:syll {
+  element syll {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5459,11 +5435,11 @@ syll =
 stress =
   
   ## contains the stress pattern for a dictionary headword, if given separately. [9.3.1. Information on Written and Spoken Forms]
-  element tei:stress { macro.paraContent, att.global.attributes, empty }
+  element stress { macro.paraContent, att.global.attributes, empty }
 gram =
   
   ## (grammatical information) within an entry in a dictionary or a terminological data file, contains grammatical information relating to a term, word, or form. [9.3.2. Grammatical Information]
-  element tei:gram {
+  element gram {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5476,7 +5452,7 @@ gram =
 gen =
   
   ## (gender) identifies the morphological gender of a lexical item, as given in the dictionary. [9.3.1. Information on Written and Spoken Forms]
-  element tei:gen {
+  element gen {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5485,7 +5461,7 @@ gen =
 number =
   
   ## indicates grammatical number associated with a form, as given in a dictionary. [9.3.1. Information on Written and Spoken Forms 9.3.2. Grammatical Information]
-  element tei:number {
+  element number {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5494,7 +5470,7 @@ number =
 case =
   
   ## contains grammatical case information given by a dictionary for a given form. [9.3.1. Information on Written and Spoken Forms]
-  element tei:case {
+  element case {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5503,7 +5479,7 @@ case =
 per =
   
   ## (person) contains an indication of the grammatical person (1st, 2nd, 3rd, etc.) associated with a given inflected form in a dictionary. [9.3.1. Information on Written and Spoken Forms]
-  element tei:per {
+  element per {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5512,7 +5488,7 @@ per =
 tns =
   
   ## (tense) indicates the grammatical tense associated with a given inflected form in a dictionary. [9.3.1. Information on Written and Spoken Forms]
-  element tei:tns {
+  element tns {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5521,7 +5497,7 @@ tns =
 mood =
   
   ## contains information about the grammatical mood of verbs (e.g. indicative, subjunctive, imperative). [9.3.1. Information on Written and Spoken Forms]
-  element tei:mood {
+  element mood {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5530,7 +5506,7 @@ mood =
 iType =
   
   ## (inflectional class) indicates the inflectional class associated with a lexical item. [9.3.1. Information on Written and Spoken Forms]
-  element tei:iType {
+  element iType {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5543,7 +5519,7 @@ iType =
 gramGrp =
   
   ## (grammatical information group) groups morpho-syntactic information about a lexical item, e.g. pos, gen, number, case, or iType (inflectional class). [9.3.2. Grammatical Information]
-  element tei:gramGrp {
+  element gramGrp {
     (text
      | model.gLike
      | model.phrase
@@ -5558,7 +5534,7 @@ gramGrp =
 pos =
   
   ## (part of speech) indicates the part of speech assigned to a dictionary headword such as noun, verb, or adjective. [9.3.2. Grammatical Information]
-  element tei:pos {
+  element pos {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5567,7 +5543,7 @@ pos =
 subc =
   
   ## (subcategorization) contains subcategorization information (transitive/intransitive, countable/non-countable, etc.) [9.3.2. Grammatical Information]
-  element tei:subc {
+  element subc {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5576,7 +5552,7 @@ subc =
 colloc =
   
   ## (collocate) contains any sequence of words that co-occur with the headword with significant frequency. [9.3.2. Grammatical Information]
-  element tei:colloc {
+  element colloc {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5586,7 +5562,7 @@ colloc =
 def =
   
   ## (definition) contains definition text in a dictionary entry. [9.3.3.1. Definitions]
-  element tei:def {
+  element def {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5595,7 +5571,7 @@ def =
 etym =
   
   ## (etymology) encloses the etymological information in a dictionary entry. [9.3.4. Etymological Information]
-  element tei:etym {
+  element etym {
     (text
      | model.gLike
      | model.phrase
@@ -5613,7 +5589,7 @@ etym =
 lang =
   
   ## (language name) contains the name of a language mentioned in etymological or other linguistic discussion. [9.3.4. Etymological Information]
-  element tei:lang {
+  element lang {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5622,7 +5598,7 @@ lang =
 usg =
   
   ## (usage) contains usage information in a dictionary entry. [9.3.5.2. Usage Information and Other Labels]
-  element tei:usg {
+  element usg {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5635,7 +5611,7 @@ usg =
 lbl =
   
   ## (label) contains a label for a form, example, translation, or other piece of information, e.g. abbreviation for, contraction of, literally, approximately, synonyms:, etc. [9.3.1. Information on Written and Spoken Forms 9.3.3.2. Translation Equivalents 9.3.5.3. Cross-References to Other Entries]
-  element tei:lbl {
+  element lbl {
     macro.paraContent,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5647,7 +5623,7 @@ lbl =
 xr =
   
   ## (cross-reference phrase) contains a phrase, sentence, or icon referring the reader to some other location in this or another text. [9.3.5.3. Cross-References to Other Entries]
-  element tei:xr {
+  element xr {
     (text
      | model.gLike
      | model.phrase
@@ -5666,7 +5642,7 @@ xr =
 re =
   
   ## (related entry) contains a dictionary entry for a lexical item related to the headword, such as a compound phrase or derived form, embedded inside a larger entry. [9.3.6. Related Entries]
-  element tei:re {
+  element re {
     (text
      | model.gLike
      | sense
@@ -5681,7 +5657,7 @@ re =
 oRef =
   
   ## (orthographic-form reference) in a dictionary example, indicates a reference to the orthographic form(s) of the headword. [9.4. Headword and Pronunciation References]
-  element tei:oRef {
+  element oRef {
     empty,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5695,7 +5671,7 @@ oRef =
 oVar =
   
   ## (orthographic-variant reference) in a dictionary example, indicates a reference to variant orthographic form(s) of the headword. [9. Dictionaries]
-  element tei:oVar {
+  element oVar {
     (text | model.gLike | oRef)*,
     att.global.attributes,
     att.lexicographic.attributes,
@@ -5709,7 +5685,7 @@ oVar =
 pRef =
   
   ## (pronunciation reference) in a dictionary example, indicates a reference to the pronunciation(s) of the headword. [9.4. Headword and Pronunciation References]
-  element tei:pRef {
+  element pRef {
     empty,
     att.global.attributes,
     att.pointing.attributes,
@@ -5719,7 +5695,7 @@ pRef =
 pVar =
   
   ## (pronunciation-variant reference) in a dictionary example, indicates a reference to variant pronunciation(s) of the headword. [9. Dictionaries]
-  element tei:pVar {
+  element pVar {
     (text | model.gLike | pRef)*,
     att.global.attributes,
     att.pointing.attributes,
