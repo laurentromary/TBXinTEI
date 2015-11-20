@@ -7,7 +7,7 @@ default namespace tei = "http://www.tei-c.org/ns/1.0"
 namespace xi = "http://www.w3.org/2001/XInclude"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2015-11-09T22:20:58Z. .
+# Schema generated from ODD source 2015-11-20T07:11:40Z. .
 # TEI Edition: Version 2.9.1. Last updated on
 #	15th October 2015, revision 46ac023
 # TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.9.1/
@@ -5721,7 +5721,12 @@ tig =
   
   ## groups all information relevant to the Term Section component as defined in ISO 16642 (TMF)
   element tbx:tig {
-    (term, termNote*, model.auxInfo*), att.global.attributes, empty
+    ((term | form+),
+     (gramGrp | (termNote*, model.auxInfo*)),
+     termNote*,
+     model.auxInfo*),
+    att.global.attributes,
+    empty
   }
 termNote =
   
@@ -5753,7 +5758,7 @@ descripGrp =
   }
 transacGrp =
   
-  ## ...
+  ## Groups together transaction information
   element tbx:transacGrp {
     (transac, (transacNote, date)*),
     text,

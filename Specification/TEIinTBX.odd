@@ -392,6 +392,8 @@
               </egXML>
             </exemplum>
           </elementSpec>
+          
+          
           <elementSpec ident="tig" ns="http://www.tbx.org" mode="add">
             <desc>groups all information relevant to the Term Section component as defined in ISO
               16642 (TMF)</desc>
@@ -401,7 +403,23 @@
             </classes>
             <content>
               <rng:group>
-                <rng:ref name="term"/>
+                <rng:choice>
+                  <rng:ref name="term"/>
+                  <rng:oneOrMore>
+                    <rng:ref name="form"/>
+                  </rng:oneOrMore>
+                </rng:choice>
+                <rng:choice>
+                  <rng:group>
+                    <rng:ref name="gramGrp"/>
+                  </rng:group>
+                  <rng:group><rng:zeroOrMore>
+                    <rng:ref name="termNote"/>
+                  </rng:zeroOrMore>
+                    <rng:zeroOrMore>
+                      <rng:ref name="model.auxInfo"/>
+                    </rng:zeroOrMore></rng:group>
+                </rng:choice>
                 <rng:zeroOrMore>
                   <rng:ref name="termNote"/>
                 </rng:zeroOrMore>
@@ -446,6 +464,7 @@
               </rng:zeroOrMore>
             </content>
           </elementSpec>
+          
           <elementSpec ident="descrip" ns="http://www.tbx.org" mode="add">
             <desc>provides descriptive information about the node in question.</desc>
             <classes>
@@ -482,6 +501,7 @@
               <p>The <gi>descrip</gi> element can be nested within a <gi>descripGrp</gi></p>
             </remarks>
           </elementSpec>
+          
           <elementSpec ident="descripGrp" ns="http://www.tbx.org" mode="add">
             <desc>...</desc>
             <classes>
@@ -506,8 +526,9 @@
               </egXML>
             </exemplum>
           </elementSpec>
+          
           <elementSpec ident="transacGrp" ns="http://www.tbx.org" mode="add">
-            <desc>...</desc>
+            <desc>Groups together transaction information</desc>
             <classes>
               <memberOf key="att.global"/>
               <memberOf key="model.auxInfo"/>
